@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/nightlight/static/css/main.3d9d07bb.chunk.css",
+    "main.js": "/nightlight/static/js/main.46a832ee.chunk.js",
+    "main.js.map": "/nightlight/static/js/main.46a832ee.chunk.js.map",
+    "runtime-main.js": "/nightlight/static/js/runtime-main.80dff1b4.js",
+    "runtime-main.js.map": "/nightlight/static/js/runtime-main.80dff1b4.js.map",
+    "static/js/2.d1596f33.chunk.js": "/nightlight/static/js/2.d1596f33.chunk.js",
+    "static/js/2.d1596f33.chunk.js.map": "/nightlight/static/js/2.d1596f33.chunk.js.map",
+    "index.html": "/nightlight/index.html",
+    "precache-manifest.a258263e634a9470832c96e624e9e7c7.js": "/nightlight/precache-manifest.a258263e634a9470832c96e624e9e7c7.js",
+    "service-worker.js": "/nightlight/service-worker.js",
+    "static/css/main.3d9d07bb.chunk.css.map": "/nightlight/static/css/main.3d9d07bb.chunk.css.map",
+    "static/js/2.d1596f33.chunk.js.LICENSE.txt": "/nightlight/static/js/2.d1596f33.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.80dff1b4.js",
+    "static/js/2.d1596f33.chunk.js",
+    "static/css/main.3d9d07bb.chunk.css",
+    "static/js/main.46a832ee.chunk.js"
+  ]
+}

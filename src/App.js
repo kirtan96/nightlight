@@ -1,49 +1,79 @@
-import React from 'react';
+import React from "react";
 import Switch from "react-switch";
-import './App.css';
-import * as firebase from 'firebase/app'
-require('firebase/database');
+import "./App.css";
+import * as firebase from "firebase/app";
+require("firebase/database");
 
 export default class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			light: false,
+			playing: false,
+			paused: true,
+		};
+	}
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      light: false
-    }
-  }
+	componentDidMount() {
+		const firebaseConfig = {
+			apiKey: "AIzaSyC-mpPq9iYl7l8qm63odw-Jxnm2LTavvKY",
+			authDomain: "nightlight-f0b70.firebaseapp.com",
+			databaseURL: "https://nightlight-f0b70-default-rtdb.firebaseio.com",
+			projectId: "nightlight-f0b70",
+			storageBucket: "nightlight-f0b70.appspot.com",
+			messagingSenderId: "1056029575292",
+			appId: "1:1056029575292:web:c4bdfe375253211e76a1f9",
+			measurementId: "G-DJJQ62GH11",
+		};
+		firebase.initializeApp(firebaseConfig);
+		firebase
+			.database()
+			.ref("light")
+			.on("value", (snap) => {
+				this.setState({ light: snap.val() });
+			});
+		firebase
+			.database()
+			.ref("playing")
+			.on("value", (snap) => {
+				this.setState({ playing: snap.val() });
+			});
+		firebase
+			.database()
+			.ref("paused")
+			.on("value", (snap) => {
+				this.setState({ paused: snap.val() });
+			});
+	}
 
-  componentDidMount() {
-    var firebaseConfig = {
-      apiKey: "AIzaSyAKI2kYW0patts6MCv5Eo1_uA27IH_g6yQ",
-      authDomain: "nightlight-cb29c.firebaseapp.com",
-      databaseURL: "https://nightlight-cb29c.firebaseio.com",
-      projectId: "nightlight-cb29c",
-      storageBucket: "nightlight-cb29c.appspot.com",
-      messagingSenderId: "1038752337142",
-      appId: "1:1038752337142:web:b8ab7d84f91518584770d7"
-    };
-    firebase.initializeApp(firebaseConfig);
-    firebase.database().ref('light').on('value', snap => {
-      this.setState({light: snap.val()})
-    })
-  }
+	async toggleLight() {
+		await this.setState({ light: !this.state.light });
+		firebase.database().ref("light").set(this.state.light);
+	}
 
-  async toggleLight() {
-    await this.setState({light: !this.state.light})
-    firebase.database().ref('light').set(this.state.light)
-  }
+	async pausePlay() {
+		firebase.database().ref("paused").set(!this.state.paused);
+	}
 
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <center>
-            <p>Light is {this.state.light ? 'ON' : 'OFF'}</p>
-            <Switch onChange={() => this.toggleLight()} checked={this.state.light} />
-          </center>
-        </header>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="App">
+				<header className="App-header">
+					<center>
+						<p>Light is {this.state.light ? "ON" : "OFF"}</p>
+						<Switch
+							onChange={() => this.toggleLight()}
+							checked={this.state.light}
+						/>
+						<br />
+						{this.state.playing && (
+							<button onClick={() => this.pausePlay()} className="button">
+								{this.state.paused ? "Play" : "Pause"}
+							</button>
+						)}
+					</center>
+				</header>
+			</div>
+		);
+	}
 }
